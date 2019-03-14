@@ -5,9 +5,14 @@ const Web3 = require('web3');
 
 const web3 = new Web3(process.env.WEB3_PROVIDER);
 
-web3.eth.getBlock(0)
-  .then(block => {
-    console.log(`Got block ${block.hash}`)
-  })
+const blockStream = new Observable(function (observer) {
+  web3.eth.subscribe('newBlockHeaders')
+    .on('data', block => observer.next(block))
+    .on('error', err => observer.error(err))
+});
 
-console.log('Hello!!!')
+let subscriber = blockStream.subscribe({
+  next(block) {
+    console.log(block.number, block.hash)
+  }
+})
