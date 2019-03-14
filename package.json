@@ -1,0 +1,10 @@
+{
+  "name": "rxjs-web3",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "rxjs": "^6.4.0",
+    "web3": "^1.0.0-beta.48"
+  }
+}
